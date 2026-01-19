@@ -5,7 +5,7 @@ from ..db import db
 
 class Mood(db.Model):
     __tablename__ = 'moods'
-    __tableargs__ = {'extend_existing': True}
+    __table_args__ = {'extend_existing': True}
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(20), nullable=False)

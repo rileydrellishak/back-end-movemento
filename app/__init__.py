@@ -1,6 +1,6 @@
 from flask import Flask
 from .db import db, migrate
-from .models import mood, movement, journal_entry
+from .models import mood, movement, journal_entry, user
 # from .routes import ---
 import os
 from flask_cors import CORS
