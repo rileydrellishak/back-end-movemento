@@ -4,7 +4,7 @@ from ..db import db
 # mood has id, name, slug, valence, energy
 
 class Mood(db.Model):
-    __tablename__ = 'mood'
+    __tablename__ = 'moods'
     __tableargs__ = {'extend_existing': True}
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

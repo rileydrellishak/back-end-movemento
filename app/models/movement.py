@@ -4,7 +4,7 @@ from ..db import db
 # movement has id, name, slug, category, is_outdoor
 
 class Movement(db.Model):
-    __tablename__ = 'movement'
+    __tablename__ = 'movements'
     __tableargs__ = {'extend_existing': True}
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
