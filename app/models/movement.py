@@ -1,7 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import ForeignKey, String, Boolean
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Boolean
 from ..db import db
-# movement has id, name, slug, category, is_outdoor
 
 class Movement(db.Model):
     __tablename__ = 'movements'

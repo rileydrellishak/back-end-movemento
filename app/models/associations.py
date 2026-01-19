@@ -1,5 +1,4 @@
 from ..db import db
-from sqlalchemy import Column, Table, ForeignKey, Integer
 
 journal_entry_movements = db.Table(
     'journal_entry_movements',

@@ -1,7 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import ForeignKey, String, Integer
 from ..db import db
-# mood has id, name, slug, valence, energy
 
 class Mood(db.Model):
     __tablename__ = 'moods'
