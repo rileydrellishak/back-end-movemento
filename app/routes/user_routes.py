@@ -1,7 +1,5 @@
 from flask import Blueprint, request
 from app.models.user import User
-from app.models.journal_entry import JournalEntry
-from app.db import db
 from app.routes.route_utilities import create_model, get_models_with_filters, validate_model
 
 bp = Blueprint('users_bp', __name__, url_prefix='/users')
