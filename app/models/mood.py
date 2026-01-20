@@ -21,10 +21,10 @@ class Mood(db.Model):
 
     je_moods_before: Mapped[list['JournalEntry']] = relationship(
         secondary=je_mood_before_association,
-        back_populates='movement'
+        back_populates='moods_before'
     )
 
     je_moods_after: Mapped[list['JournalEntry']] = relationship(
         secondary=je_mood_after_association,
-        back_populates='movement'
+        back_populates='moods_after'
     )

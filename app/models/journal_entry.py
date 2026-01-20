@@ -2,7 +2,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, String, DateTime, Integer
 from typing import Optional
 from app.db import db
-from datetime import datetime
+from datetime import datetime, timezone
 from app.models.associations import je_movement_association, je_mood_before_association, je_mood_after_association
 
 # journal entry has id, movement_type (id of movement, fk), mood before (fk), mood after (fk), reflection, user id, img path, date, time
@@ -24,7 +24,7 @@ class JournalEntry(db.Model):
         secondary=je_mood_before_association,
         back_populates='journal_entry'
     )
-    
+
     moods_after: Mapped[list['Mood']] = relationship(
         secondary=je_mood_after_association,
         back_populates='journal_entry'
@@ -39,4 +39,8 @@ class JournalEntry(db.Model):
         nullable=True
     )
     
-    created_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    created_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=True
+    )
