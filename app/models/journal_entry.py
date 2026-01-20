@@ -24,12 +24,11 @@ class JournalEntry(db.Model):
         secondary=je_mood_before_association,
         back_populates='journal_entry'
     )
-    # moods_before: Mapped[list['Mood']] = 
+    
     moods_after: Mapped[list['Mood']] = relationship(
         secondary=je_mood_after_association,
         back_populates='journal_entry'
     )
-    # moods_after: Mapped[list['Mood']] =
 
     reflection: Mapped[str] = mapped_column(String(511))
     
