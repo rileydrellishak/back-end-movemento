@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Integer
-from ..db import db
+from app.db import db
 
 # users have id, name, journal_entries
 

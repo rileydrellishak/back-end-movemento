@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, Boolean, Integer
-from ..db import db
+from app.db import db
 
 # movements have id, name, slug, category, is_outdoor
 
