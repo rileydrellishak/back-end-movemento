@@ -16,17 +16,17 @@ class JournalEntry(db.Model):
         backref='journal_entries'
         )
     
-    moods_before: Mapped[list['Mood']] = relationship(
-        'Mood',
-        secondary=journal_entry_moods_before,
-        backref='journal_entries'
-        )
+    # moods_before: Mapped[list['Mood']] = relationship(
+    #     'Mood',
+    #     secondary=journal_entry_moods_before,
+    #     back_populates='journal_entries_moods_before'
+    #     )
     
-    moods_after: Mapped[list['Mood']] = relationship(
-        'Mood',
-        secondary=journal_entry_moods_after,
-        backref='journal_entries'
-    )
+    # moods_after: Mapped[list['Mood']] = relationship(
+    #     'Mood',
+    #     secondary=journal_entry_moods_after,
+    #     back_populates='journal_entries_moods_after'
+    # )
 
     reflection: Mapped[str] = mapped_column(String(1000), nullable=True)
 

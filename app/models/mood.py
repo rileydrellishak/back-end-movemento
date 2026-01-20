@@ -1,5 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, String, Integer
+from .associations import journal_entry_moods_before, journal_entry_moods_after
 from ..db import db
 
 class Mood(db.Model):
