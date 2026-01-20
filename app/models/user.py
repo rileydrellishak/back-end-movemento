@@ -17,3 +17,10 @@ class User(db.Model):
     journal_entries: Mapped[list['JournalEntry']] = relationship(
         back_populates='user'
     )
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'journal_entries': [je.to_dict() for je in self.journal_entries]
+        }

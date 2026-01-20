@@ -3,6 +3,7 @@ from .db import db, migrate
 from .models import mood, movement, journal_entry, user
 # from .routes import ---
 from .routes.user_routes import bp as users_bp
+from .routes.journal_entry_routes import bp as entries_bp
 import os
 from flask_cors import CORS
 from .config import Config
@@ -23,5 +24,6 @@ def create_app(config=None):
 
     # register blueprints here
     app.register_blueprint(users_bp)
+    app.register_blueprint(entries_bp)
 
     return app

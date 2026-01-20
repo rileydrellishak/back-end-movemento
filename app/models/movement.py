@@ -20,5 +20,14 @@ class Movement(db.Model):
 
     journal_entries: Mapped[list['JournalEntry']] = relationship(
         secondary=je_movement_association,
-        back_populates='movement'
+        back_populates='movements'
     )
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'slug': self.slug,
+            'category': self.category,
+            'is_outdoor': self.is_outdoor
+        }
