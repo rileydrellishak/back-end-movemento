@@ -6,3 +6,11 @@ from ..db import db
 
 class User(db.Model):
     __tablename__ = 'users'
+
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True)
+    
+    name: Mapped[str] = mapped_column(String(30))
+    # journal_entries - a list of the user's journal entries, populate from journal_entries table
