@@ -14,3 +14,10 @@ je_mood_before_association = Table(
     Column('je_id', Integer, ForeignKey('journal_entry.id'), primary_key=True),
     Column('mood_id', Integer, ForeignKey('mood.id'), primary_key=True)
 )
+
+je_mood_after_association = Table(
+    'je_mood_after_association',
+    db.metadata,
+    Column('je_id', Integer, ForeignKey('journal_entry.id'), primary_key=True),
+    Column('mood_id', Integer, ForeignKey('mood.id'), primary_key=True)
+)
