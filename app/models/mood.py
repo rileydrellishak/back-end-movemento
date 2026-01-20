@@ -5,4 +5,4 @@ from ..db import db
 # moods have id, name, slug, valence, energy
 
 class Mood(db.Model):
-    __tablename__ = 'moods'
+    __tablename__ = 'mood'

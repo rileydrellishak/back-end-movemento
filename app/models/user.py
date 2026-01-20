@@ -5,7 +5,7 @@ from ..db import db
 # users have id, name, journal_entries
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     id: Mapped[int] = mapped_column(
         Integer,

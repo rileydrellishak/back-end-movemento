@@ -5,7 +5,7 @@ from ..db import db
 # movements have id, name, slug, category, is_outdoor
 
 class Movement(db.Model):
-    __tablename__ = 'movements'
+    __tablename__ = 'movement'
 
     id: Mapped[int] = mapped_column(
         Integer,
