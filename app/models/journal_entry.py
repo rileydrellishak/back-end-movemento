@@ -21,13 +21,11 @@ class JournalEntry(db.Model):
 
     reflection: Mapped[str] = mapped_column(String(511))
     
-    # user_id: Mapped['User'] = 
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    user: Mapped['User'] = relationship(back_populates='journal_entries')
     
     img_path: Mapped[Optional[str]] = mapped_column(
         nullable=True
     )
     
-    created_at: Mapped[Optional[datetime]] = mapped_column(
-        DateTime,
-
-    )
+    created_at: Mapped[Optional[datetime]] = mapped_column(DateTime)

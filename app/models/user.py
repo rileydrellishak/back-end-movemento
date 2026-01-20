@@ -14,3 +14,6 @@ class User(db.Model):
     
     name: Mapped[str] = mapped_column(String(30))
     # journal_entries - a list of the user's journal entries, populate from journal_entries table
+    journal_entries: Mapped[list['JournalEntry']] = relationship(
+        back_populates='user'
+    )
