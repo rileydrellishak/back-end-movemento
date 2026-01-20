@@ -18,16 +18,16 @@ class JournalEntry(db.Model):
 
     movements: Mapped[list['Movement']] = relationship(
         secondary=je_movement_association,
-        back_populates='journal_entry'
+        back_populates='journal_entries'
     )
     moods_before: Mapped[list['Mood']] = relationship(
         secondary=je_mood_before_association,
-        back_populates='journal_entry'
+        back_populates='je_moods_before'
     )
 
     moods_after: Mapped[list['Mood']] = relationship(
         secondary=je_mood_after_association,
-        back_populates='journal_entry'
+        back_populates='je_moods_after'
     )
 
     reflection: Mapped[str] = mapped_column(String(511))

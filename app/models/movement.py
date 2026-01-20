@@ -20,5 +20,5 @@ class Movement(db.Model):
 
     journal_entries: Mapped[list['JournalEntry']] = relationship(
         secondary=je_movement_association,
-        back_populates='movement'
+        back_populates='movements'
     )
