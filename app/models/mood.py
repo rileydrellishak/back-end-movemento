@@ -1,14 +1,30 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, String, Integer
-from .associations import journal_entry_moods_before, journal_entry_moods_after
-from ..db import db
+from app.db import db
+from app.models.associations import je_mood_before_association, je_mood_after_association
+
+# moods have id, name, slug, valence, energy
 
 class Mood(db.Model):
-    __tablename__ = 'moods'
-    __table_args__ = {'extend_existing': True}
+    __tablename__ = 'mood'
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(20), nullable=False)
-    slug: Mapped[str] = mapped_column(String(30), unique=True, nullable=False)
-    valence: Mapped[str] = mapped_column(String(20), nullable=False)
-    energy: Mapped[str] = mapped_column(String(20), nullable=False)
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    name: Mapped[str] = mapped_column(String(30))
+    slug: Mapped[str] = mapped_column(String(30))
+    valence: Mapped[str] = mapped_column(String(30))
+    energy: Mapped[str] = mapped_column(String(30))
+
+    je_moods_before: Mapped[list['JournalEntry']] = relationship(
+        secondary=je_mood_before_association,
+        back_populates='moods_before'
+    )
+
+    je_moods_after: Mapped[list['JournalEntry']] = relationship(
+        secondary=je_mood_after_association,
+        back_populates='moods_after'
+    )

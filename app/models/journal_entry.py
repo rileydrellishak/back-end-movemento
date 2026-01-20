@@ -1,44 +1,46 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import ForeignKey, String, DateTime
-from ..db import db
-from .associations import journal_entry_movements, journal_entry_moods_before, journal_entry_moods_after
-from datetime import datetime
+from sqlalchemy import ForeignKey, String, DateTime, Integer
+from typing import Optional
+from app.db import db
+from datetime import datetime, timezone
+from app.models.associations import je_movement_association, je_mood_before_association, je_mood_after_association
 
 # journal entry has id, movement_type (id of movement, fk), mood before (fk), mood after (fk), reflection, user id, img path, date, time
 
 class JournalEntry(db.Model):
-    __tablename__ = 'journal_entries'
+    __tablename__ = 'journal_entry'
 
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
     movements: Mapped[list['Movement']] = relationship(
-        'Movement',
-        secondary=journal_entry_movements,
-        backref='journal_entries'
-        )
-    
-    # moods_before: Mapped[list['Mood']] = relationship(
-    #     'Mood',
-    #     secondary=journal_entry_moods_before,
-    #     back_populates='journal_entries_moods_before'
-    #     )
-    
-    # moods_after: Mapped[list['Mood']] = relationship(
-    #     'Mood',
-    #     secondary=journal_entry_moods_after,
-    #     back_populates='journal_entries_moods_after'
-    # )
-
-    reflection: Mapped[str] = mapped_column(String(1000), nullable=True)
-
-    user_id: Mapped[int] = mapped_column(
-        ForeignKey('users.id'),
-        nullable=False
+        secondary=je_movement_association,
+        back_populates='journal_entry'
+    )
+    moods_before: Mapped[list['Mood']] = relationship(
+        secondary=je_mood_before_association,
+        back_populates='journal_entry'
     )
 
-    user: Mapped['User'] = relationship(
-        'User',
-        back_populates='journal_entries'
+    moods_after: Mapped[list['Mood']] = relationship(
+        secondary=je_mood_after_association,
+        back_populates='journal_entry'
     )
 
-    img_path: Mapped[str] = mapped_column(nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=datetime.now)
+    reflection: Mapped[str] = mapped_column(String(511))
+    
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    user: Mapped['User'] = relationship(back_populates='journal_entries')
+    
+    img_path: Mapped[Optional[str]] = mapped_column(
+        nullable=True
+    )
+    
+    created_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=True
+    )
