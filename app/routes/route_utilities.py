@@ -44,7 +44,7 @@ def get_models_with_filters(cls, filters=None):
     return models_response
 
 def create_model(cls, data):
-    new_user = cls.from_dict(data)
-    db.session.add(new_user)
+    new_model = cls.from_dict(data)
+    db.session.add(new_model)
     db.session.commit()
-    return new_user.to_dict()
+    return new_model.to_dict()
