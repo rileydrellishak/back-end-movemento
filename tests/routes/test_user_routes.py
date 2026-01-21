@@ -2,7 +2,7 @@ from app.models.user import User
 from app.db import db
 import pytest
 
-def test_get_one_user(client, one_user):
+def test_get_one_user(client, user_one):
     response = client.get('/users/1')
     response_body = response.get_json()
 
