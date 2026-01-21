@@ -36,16 +36,33 @@ def app():
 def client(app):
     return app.test_client()
 
+# User fixtures
 @pytest.fixture
-def one_user(app):
-    db.session.add(
-        User(name='Riley')
-    )
+def user_one(app):
+    riley = User(name='Riley')
 
+    db.session.add(riley)
+    db.session.commit()
+
+    return riley
+
+@pytest.fixture
+def user_two(app):
+    maille = User(name='Maille')
+
+    db.session.add(maille)
     db.session.commit()
 
 @pytest.fixture
-def three_movements(app):
+def user_three(app):
+    bixby = User(name='Bixby')
+
+    db.session.add(bixby)
+    db.session.commit()
+
+# Movement fixtures
+@pytest.fixture
+def movement_one(app):
     yoga = Movement(
         name='Yoga',
         slug='yoga',
@@ -65,5 +82,104 @@ def three_movements(app):
         is_outdoor=False
     )
     
-    db.session.add_all([yoga, volleyball, dance])
+    db.session.add(yoga)
     db.session.commit()
+
+    return yoga
+
+@pytest.fixture
+def movement_two(app):
+    volleyball = Movement(
+        name='Volleyball',
+        slug='volleyball',
+        category='sports',
+        is_outdoor=False
+    )
+
+    db.session.add(volleyball)
+    db.session.commit()
+
+    return volleyball
+
+@pytest.fixture
+def movement_three(app):
+    dance = Movement(
+        name='Dance',
+        slug='dance',
+        category='cardio',
+        is_outdoor=False
+    )
+
+    db.session.add(dance)
+    db.session.commit()
+
+    return dance
+
+@pytest.fixture
+def movement_four(app):
+    outdoor_walk = Movement(
+        name='Outdoor Walk',
+        slug='outdoor_walk',
+        category='cardio',
+        is_outdoor=True
+    )
+
+    db.session.add(outdoor_walk)
+    db.session.commit()
+
+    return outdoor_walk
+
+# Mood fixtures
+@pytest.fixture
+def mood_one(app):
+    happy = Mood(
+        name='Happy',
+        slug='happy',
+        valence='positive',
+        energy='medium'
+    )
+
+    db.session.add(happy)
+    db.session.commit()
+    return happy
+
+@pytest.fixture
+def mood_two(app):
+    sad = Mood(
+        name='Sad',
+        slug='sad',
+        valence='negative',
+        energy='low'
+    )
+
+    db.session.add(sad)
+    db.session.commit()
+    return sad
+
+@pytest.fixture
+def mood_three(app):
+    neutral = Mood(
+        name='Neutral',
+        slug='neutral',
+        valence='neutral',
+        energy='medium'
+    )
+
+    db.session.add(neutral)
+    db.session.commit()
+    return neutral
+
+@pytest.fixture
+def mood_four(app):
+    energized = Mood(
+        name='Energized',
+        slug='energized',
+        valence='positive',
+        energy='high'
+    )
+
+    db.session.add(energized)
+    db.session.commit()
+    return energized
+
+# Journal Entry fixtures
