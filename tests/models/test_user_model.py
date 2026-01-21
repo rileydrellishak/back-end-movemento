@@ -8,6 +8,7 @@ def test_user_to_dict_method():
     )
 
     user_dict = user.to_dict()
+    
     assert type(user_dict) == dict
     assert user_dict == {
         'id': None,
