@@ -4,6 +4,8 @@ from .models import mood, movement, journal_entry, user
 # from .routes import ---
 from .routes.user_routes import bp as users_bp
 from .routes.journal_entry_routes import bp as entries_bp
+from .routes.movement_routes import bp as movements_bp
+from .routes.mood_routes import bp as moods_bp
 import os
 from flask_cors import CORS
 from .config import Config
@@ -25,5 +27,7 @@ def create_app(config=None):
     # register blueprints here
     app.register_blueprint(users_bp)
     app.register_blueprint(entries_bp)
+    app.register_blueprint(movements_bp)
+    app.register_blueprint(moods_bp)
 
     return app
