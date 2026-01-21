@@ -24,3 +24,11 @@ class User(db.Model):
             'name': self.name,
             'journal_entries': [je.to_dict() for je in self.journal_entries]
         }
+    
+    @classmethod
+    def from_dict(cls, data):
+        new_user = User(
+            name=data['name'],
+            journal_entries=data.get('journal_entries', [])
+        )
+        return new_user

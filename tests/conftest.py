@@ -43,3 +43,27 @@ def one_user(app):
     )
 
     db.session.commit()
+
+@pytest.fixture
+def three_movements(app):
+    yoga = Movement(
+        name='Yoga',
+        slug='yoga',
+        category='mind_body',
+        is_outdoor=False
+    )
+    volleyball = Movement(
+        name='Volleyball',
+        slug='volleyball',
+        category='sports',
+        is_outdoor=False
+    )
+    dance = Movement(
+        name='Dance',
+        slug='dance',
+        category='cardio',
+        is_outdoor=False
+    )
+    
+    db.session.add_all([yoga, volleyball, dance])
+    db.session.commit()

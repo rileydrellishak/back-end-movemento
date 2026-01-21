@@ -8,3 +8,8 @@ bp = Blueprint('movements_bp', __name__, url_prefix='/movements')
 @bp.get('')
 def get_all_movements():
     return get_models_with_filters(Movement, request.args)
+
+@bp.get('/<id>')
+def get_movement_by_id(id):
+    movement = validate_model(Movement, id)
+    return movement.to_dict()

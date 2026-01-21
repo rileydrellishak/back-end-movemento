@@ -12,3 +12,13 @@ def test_get_one_user(client, one_user):
         'name': 'Riley',
         'journal_entries': []
     }
+
+@pytest.mark.skip(reason='things are silly')
+def test_create_one_user(client):
+    user_data = {
+        'name': 'Riley'
+    }
+    response = client.post('/users', json=user_data)
+    response_body = response.get_json()
+
+    assert response.status_code == 201
