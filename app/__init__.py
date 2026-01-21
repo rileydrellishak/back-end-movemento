@@ -1,6 +1,6 @@
 from flask import Flask
 from .db import db, migrate
-from .models import mood, movement, journal_entry, user
+from .models import movement, journal_entry, user, mood
 # from .routes import ---
 from .routes.user_routes import bp as users_bp
 from .routes.journal_entry_routes import bp as entries_bp
