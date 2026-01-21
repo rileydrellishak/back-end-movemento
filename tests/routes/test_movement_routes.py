@@ -42,8 +42,8 @@ def test_get_one_movement_invalid_id(client, movement_one, movement_two, movemen
 
     assert response.status_code == 400
     assert response_body == {
-        'message': f'Id two invalid. Ids must be integers.'
-        }
+        'message': 'Id two invalid. Ids must be integers.'
+    }
     
 def test_get_one_movement_id_not_found(client, movement_one, movement_two, movement_three):
     response = client.get('/movements/5')
