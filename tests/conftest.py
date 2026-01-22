@@ -53,12 +53,16 @@ def user_two(app):
     db.session.add(maille)
     db.session.commit()
 
+    return maille
+
 @pytest.fixture
 def user_three(app):
     bixby = User(name='Bixby')
 
     db.session.add(bixby)
     db.session.commit()
+
+    return bixby
 
 # Movement fixtures
 @pytest.fixture
@@ -67,18 +71,6 @@ def movement_one(app):
         name='Yoga',
         slug='yoga',
         category='mind_body',
-        is_outdoor=False
-    )
-    volleyball = Movement(
-        name='Volleyball',
-        slug='volleyball',
-        category='sports',
-        is_outdoor=False
-    )
-    dance = Movement(
-        name='Dance',
-        slug='dance',
-        category='cardio',
         is_outdoor=False
     )
     
@@ -141,6 +133,7 @@ def mood_one(app):
 
     db.session.add(happy)
     db.session.commit()
+
     return happy
 
 @pytest.fixture
@@ -154,6 +147,7 @@ def mood_two(app):
 
     db.session.add(sad)
     db.session.commit()
+
     return sad
 
 @pytest.fixture
@@ -167,6 +161,7 @@ def mood_three(app):
 
     db.session.add(neutral)
     db.session.commit()
+
     return neutral
 
 @pytest.fixture
@@ -180,6 +175,7 @@ def mood_four(app):
 
     db.session.add(energized)
     db.session.commit()
+
     return energized
 
 # Journal Entry fixtures
