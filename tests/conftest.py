@@ -222,3 +222,25 @@ def journal_entry_two(app, user_one, mood_one, mood_three, movement_three, movem
     db.session.commit()
 
     return journal_entry
+
+@pytest.fixture
+def journal_entry_three(app, user_three, mood_one, mood_three, movement_three, movement_four):
+    # user 1 is Riley
+    # mood 1 is happy
+    # mood 2 is sad
+    # movement 1 is yoga
+    # movement 2 is volleyball
+
+    journal_entry = JournalEntry(
+        movements=[movement_three, movement_four],
+        moods_before=[mood_three],
+        moods_after=[mood_one],
+        reflection='My mood is way better than neutral now',
+        user_id=user_three.id,
+        img_path='/images/2.jpg',
+    )
+
+    db.session.add(journal_entry)
+    db.session.commit()
+
+    return journal_entry
