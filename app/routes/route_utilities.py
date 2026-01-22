@@ -48,5 +48,5 @@ def create_model(cls, data):
 
     db.session.add(new_model)
     db.session.commit()
-    
-    return new_model.to_dict(), 201
+
+    return new_model.to_dict()

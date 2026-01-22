@@ -179,3 +179,46 @@ def mood_four(app):
     return energized
 
 # Journal Entry fixtures
+@pytest.fixture
+def journal_entry_one(app, user_one, mood_one, mood_two, movement_one, movement_two):
+    # user 1 is Riley
+    # mood 1 is happy
+    # mood 2 is sad
+    # movement 1 is yoga
+    # movement 2 is volleyball
+
+    journal_entry = JournalEntry(
+        movements=[movement_one, movement_two],
+        moods_before=[mood_two],
+        moods_after=[mood_one],
+        reflection='Feeling so much better!',
+        user_id=user_one.id,
+        img_path='/images/1.jpg',
+    )
+
+    db.session.add(journal_entry)
+    db.session.commit()
+
+    return journal_entry
+
+@pytest.fixture
+def journal_entry_two(app, user_one, mood_one, mood_three, movement_three, movement_four):
+    # user 1 is Riley
+    # mood 1 is happy
+    # mood 2 is sad
+    # movement 1 is yoga
+    # movement 2 is volleyball
+
+    journal_entry = JournalEntry(
+        movements=[movement_three, movement_four],
+        moods_before=[mood_three],
+        moods_after=[mood_one],
+        reflection='My mood is way better than neutral now',
+        user_id=user_one.id,
+        img_path='/images/2.jpg',
+    )
+
+    db.session.add(journal_entry)
+    db.session.commit()
+
+    return journal_entry
