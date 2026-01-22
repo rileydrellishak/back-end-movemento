@@ -7,6 +7,7 @@ from app.models.associations import je_movement_association, je_mood_before_asso
 from app.models.movement import Movement
 from app.models.mood import Mood
 from app.models.user import User
+from app.routes.route_utilities import validate_model
 
 # journal entry has id, movement_type (id of movement, fk), mood before (fk), mood after (fk), reflection, user id, img path, date, time
 
@@ -49,44 +50,40 @@ class JournalEntry(db.Model):
     )
 
     @classmethod
+    def from_dict_with_ids(cls, entry_data):
+        for i in range(len(entry_data['movements'])):
+            movement = validate_model(Movement, entry_data['movements'][i])
+            entry_data['movements'][i] = movement
+        
+        for i in range(len(entry_data['moods_before'])):
+            mood_before = validate_model(Mood, entry_data['moods_before'][i])
+            entry_data['moods_before'][i] = mood_before
+
+        for i in range(len(entry_data['moods_after'])):
+            mood_after = validate_model(Mood, entry_data['moods_after'][i])
+            entry_data['moods_after'][i] = mood_after
+        
+        return cls(
+            movements=entry_data['movements'],
+            moods_before=entry_data['moods_before'],
+            moods_after=entry_data['moods_after'],
+            reflection=entry_data.get('reflection'),
+            user_id=entry_data['user_id'],
+            img_path=entry_data.get('img_path'),
+            created_at=entry_data.get('created_at', datetime.now(timezone.utc))
+        )
+
+    @classmethod
     def from_dict(cls, entry_data):
-        entry_data['created_at'] = entry_data.get('created_at', datetime.now(tz=None))
-
-        movement_ids = entry_data.get('movements', [])
-        moods_before_ids = entry_data.get('moods_before', [])
-        moods_after_ids = entry_data.get('moods_after', [])
-
-        movements = db.session.scalars(
-            select(Movement)
-            .where(Movement.id.in_(set(movement_ids)))
-            ).all() if movement_ids else []
-        
-        moods_before = db.session.scalars(
-            select(Mood)
-            .where(Mood.id.in_(set(moods_before_ids)))
-            ).all() if moods_before_ids else []
-        
-        moods_after = db.session.scalars(
-            select(Mood)
-            .where(Mood.id.in_(set(moods_after_ids)))
-            ).all() if moods_after_ids else []
-        
-        user = db.session.scalar(
-            select(User)
-            .where(User.id == entry_data['user_id'])
+        return cls(
+            movements=entry_data['movements'],
+            moods_before=entry_data['moods_before'],
+            moods_after=entry_data['moods_after'],
+            reflection=entry_data.get('reflection'),
+            user_id=entry_data['user_id'],
+            img_path=entry_data.get('img_path'),
+            created_at=entry_data.get('created_at', datetime.now(timezone.utc))
         )
-        
-        new_entry = JournalEntry(
-            movements=movements,
-            moods_before=moods_before,
-            moods_after=moods_after,
-            reflection=entry_data['reflection'],
-            created_at=entry_data['created_at'],
-            img_path=entry_data.get('img_path', None),
-            user_id=user.id
-        )
-
-        return new_entry
     
     def to_dict(self):
         return {

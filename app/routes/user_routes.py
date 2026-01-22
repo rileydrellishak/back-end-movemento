@@ -18,12 +18,14 @@ def get_user_by_id(id):
 @bp.post('')
 def create_user():
     user_data = request.get_json()
-    return create_model(User, user_data)
+    return create_model(User, user_data), 201
 
 @bp.get('/<id>/entries')
 def get_entries_for_user(id):
     user = validate_model(User, id)
-    response = user.to_dict()
+    response = []
+    for entry in user.journal_entries:
+        response.append(entry.to_dict())
     return response, 200
 
 @bp.post('/<id>/entries')
@@ -31,7 +33,12 @@ def post_entry_for_user(id):
     user = validate_model(User, id)
     entry_data = request.get_json()
     entry_data['user_id'] = user.id
-    return create_model(JournalEntry, entry_data), 201
+    new_entry = JournalEntry.from_dict_with_ids(entry_data)
+
+    db.session.add(new_entry)
+    db.session.commit()
+
+    return new_entry.to_dict(), 201
 
 @bp.delete('/<user_id>/entries/<entry_id>')
 def delete_je_by_id(user_id, entry_id):

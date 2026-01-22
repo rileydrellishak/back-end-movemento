@@ -8,3 +8,8 @@ bp = Blueprint('moods_bp', __name__, url_prefix='/moods')
 @bp.get('')
 def get_all_moods():
     return get_models_with_filters(Mood, request.args)
+
+@bp.get('/<id>')
+def get_mood_by_id(id):
+    mood = validate_model(Mood, id)
+    return mood.to_dict(), 200

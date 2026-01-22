@@ -29,10 +29,6 @@ class Mood(db.Model):
         back_populates='moods_after'
     )
 
-    @classmethod
-    def from_dict(cls, data):
-        pass
-
     def to_dict(self):
         return {
             'id': self.id,
