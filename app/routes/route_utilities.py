@@ -1,4 +1,4 @@
-from flask import abort, make_response
+from flask import abort, make_response, Response
 from ..db import db
 
 def validate_model(cls, id):
@@ -50,3 +50,11 @@ def create_model(cls, data):
     db.session.commit()
 
     return new_model.to_dict()
+
+def update_model(obj, data):
+    for attr, value in data.items():
+        if hasattr(obj, attr):
+            setattr(obj, attr, value)
+    
+    db.session.commit()
+    return Response(mimetype='application.json')

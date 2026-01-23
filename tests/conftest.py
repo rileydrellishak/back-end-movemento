@@ -34,7 +34,16 @@ def app():
 
 @pytest.fixture
 def client(app):
-    return app.test_client()
+    with app.app_context():
+        yield app.test_client()
+        db.session.remove()
+
+@pytest.fixture(autouse=True)
+def refresh_session(app):
+    with app.app_context():
+        yield
+        db.session.close()
+        db.session.remove()
 
 # User fixtures
 @pytest.fixture
