@@ -63,13 +63,13 @@ def update_users_journal_entry(user_id, entry_id):
     request_body = request.get_json()
 
     if entry in set(user.journal_entries):
-        return update_journal_entry(user, entry, request_body)
+        return update_journal_entry(entry, request_body)
     
     else:
         response = {'message': f'{user.name} does not have a journal entry with ID of {entry_id}'}
         abort(make_response(response, 404))
 
-def update_journal_entry(user, entry, entry_data):
+def update_journal_entry(entry, entry_data):
     instance_categories = {
         'movements': Movement,
         'moods_before': Mood,
