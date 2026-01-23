@@ -1,5 +1,4 @@
 from app.models.user import User
-from app.db import db
 import pytest
 
 def test_user_to_dict_method():

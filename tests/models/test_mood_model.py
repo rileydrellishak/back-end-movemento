@@ -1,6 +1,4 @@
 from app.models.mood import Mood
-from app.db import db
-import pytest
 
 def test_mood_to_dict_method():
     mood = Mood(

@@ -1,7 +1,3 @@
-from app.models.movement import Movement
-from app.db import db
-import pytest
-
 def test_get_all_movements(client, movement_one, movement_two):
     response = client.get('/movements')
     response_body = response.get_json()
