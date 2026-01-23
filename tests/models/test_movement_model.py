@@ -1,6 +1,4 @@
 from app.models.movement import Movement
-from app.db import db
-import pytest
 
 def test_movement_to_dict_method():
     movement = Movement(

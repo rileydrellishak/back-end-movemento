@@ -1,7 +1,3 @@
-from app.models.mood import Mood
-from app.db import db
-import pytest
-
 def test_get_all_moods(client, mood_one, mood_two, mood_three):
     response = client.get('/moods')
     response_body = response.get_json()

@@ -1,8 +1,6 @@
 from app.models.journal_entry import JournalEntry
-from app.db import db
 from app.models.movement import Movement
 from app.models.mood import Mood
-from app.models.user import User
 import pytest
 
 movement = Movement(
