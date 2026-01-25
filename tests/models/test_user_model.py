@@ -3,7 +3,7 @@ import pytest
 
 def test_user_to_dict_method():
     user = User(
-        name='Riley'
+        name='Riley',
     )
 
     user_dict = user.to_dict()

@@ -6,4 +6,4 @@ bp = Blueprint('journal_entries_bp', __name__, url_prefix='/entries')
 
 @bp.get('')
 def get_all_entries():
-    return get_models_with_filters(JournalEntry, request.args)
+    return get_models_with_filters(JournalEntry, request.args), 200

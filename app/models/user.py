@@ -22,7 +22,7 @@ class User(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'journal_entries': [je.to_dict() for je in self.journal_entries]
+            'journal_entries': [je.id for je in self.journal_entries]
         }
     
     @classmethod
