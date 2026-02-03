@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta
 from app.config import Config
 
-config = oci.config.from_file()
+config = oci.config.from_file('~/app/config.py')
 
 object_storage_client = oci.object_storage.ObjectStorageClient(config)
 
