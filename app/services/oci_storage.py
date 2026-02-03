@@ -1,12 +1,7 @@
 import oci
 import requests
 from datetime import datetime, timedelta
-from app.config import (
-    OCI_REGION,
-    OCI_NAMESPACE,
-    OCI_BUCKET_NAME,
-    OCI_PAR_EXPIRATION_MINUTES,
-)
+from app.config import Config
 
 config = oci.config.from_file()
 
@@ -18,16 +13,16 @@ def upload_img_with_par(file_buffer, content_type, object_name):
         name=f'upload-entry-{object_name}',
         access_type='ObjectWrite',
         object_name=object_name,
-        time_expires=datetime.now() + timedelta(minutes=OCI_PAR_EXPIRATION_MINUTES)
+        time_expires=datetime.now() + timedelta(minutes=Config.OCI_PAR_EXPIRATION_MINUTES)
     )
 
     par = object_storage_client.create_preauthenticated_request(
-        namespace_name=OCI_NAMESPACE,
-        bucket_name=OCI_BUCKET_NAME,
+        namespace_name=Config.OCI_NAMESPACE,
+        bucket_name=Config.OCI_BUCKET_NAME,
         create_preauthenticated_request_details=par_details
     )
 
-    par_url = f'https://objectstorage.{OCI_REGION}.oraclecloud.com{par.data.access_uri}'
+    par_url = f'https://objectstorage.{Config.OCI_REGION}.oraclecloud.com{par.data.access_uri}'
 
     response = requests.put(
         par_url,
@@ -38,5 +33,5 @@ def upload_img_with_par(file_buffer, content_type, object_name):
     response.raise_for_status()
 
     return (
-        f'https://objectstorage.{OCI_REGION}.oraclecloud.com/n/{OCI_NAMESPACE}/b/{OCI_BUCKET_NAME}/o/{object_name}'
+        f'https://objectstorage.{Config.OCI_REGION}.oraclecloud.com/n/{Config.OCI_NAMESPACE}/b/{Config.OCI_BUCKET_NAME}/o/{object_name}'
     )
