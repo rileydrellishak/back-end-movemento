@@ -7,7 +7,7 @@ from app.models.associations import je_movement_association, je_mood_before_asso
 from app.models.movement import Movement
 from app.models.mood import Mood
 from app.models.user import User
-from app.routes.route_utilities import validate_model
+from app.utilities.route_utilities import validate_model
 
 # journal entry has id, movement_type (id of movement, fk), mood before (fk), mood after (fk), reflection, user id, img path, date, time
 
