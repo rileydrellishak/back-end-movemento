@@ -3,7 +3,7 @@ from app.models.user import User
 from app.models.journal_entry import JournalEntry
 from app.models.movement import Movement
 from app.models.mood import Mood
-from app.routes.route_utilities import create_model, get_models_with_filters, validate_model, update_model
+from app.utilities.route_utilities import create_model, get_models_with_filters, validate_model, update_model
 from app.db import db
 
 bp = Blueprint('users_bp', __name__, url_prefix='/users')
