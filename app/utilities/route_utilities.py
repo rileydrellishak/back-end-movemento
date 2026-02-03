@@ -1,7 +1,5 @@
 from flask import abort, make_response, Response
 from ..db import db
-from PIL import Image
-from io import BytesIO
 
 def validate_model(cls, id):
     try:
@@ -60,24 +58,3 @@ def update_model(obj, data):
     
     db.session.commit()
     return Response(mimetype='application.json')
-
-def process_image(file):
-    MAX_SIZE = (1024, 1024)
-    JPEG_QUALITY = 80
-
-    image = Image.open(file.stream)
-
-    if image.mode in ('RGBA', 'P'):
-        image = image.convert('RGB')
-    
-    image.thumbnail(MAX_SIZE)
-    buffer = BytesIO()
-    image.save(
-        buffer,
-        format='JPEG',
-        quality=JPEG_QUALITY,
-        optimize=True
-    )
-
-    buffer.seek(0)
-    return buffer
