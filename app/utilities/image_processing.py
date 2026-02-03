@@ -1,5 +1,6 @@
 from PIL import Image
 from io import BytesIO
+import uuid
 
 def process_image(file):
     MAX_SIZE = (1024, 1024)
@@ -21,3 +22,6 @@ def process_image(file):
 
     buffer.seek(0)
     return buffer
+
+def generate_object_name(entry_id):
+    return f'/entries/{entry_id}/{uuid.uuid4().hex}.jpg'
