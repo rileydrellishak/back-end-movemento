@@ -24,4 +24,4 @@ def process_image(file):
     return buffer
 
 def generate_object_name(entry_id):
-    return f'/entries/{entry_id}/{uuid.uuid4().hex}.jpg'
+    return f'entries/{entry_id}/{uuid.uuid4().hex}.jpg'

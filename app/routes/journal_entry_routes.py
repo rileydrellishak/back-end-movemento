@@ -12,11 +12,13 @@ bp = Blueprint('journal_entries_bp', __name__, url_prefix='/entries')
 def get_all_entries():
     return get_models_with_filters(JournalEntry, request.args), 200
 
-@bp.route('/<entry_id>/photo', methods=['POST'])
+@bp.post('/<entry_id>/photo')
 def post_photo_for_entry(entry_id):
+    if not request.files.get('photo'):
+        return {'error': 'No photo provided'}, 400
     entry = validate_model(JournalEntry, entry_id)
-    file = request.files.get('photo')
     
+    file = request.files.get('photo')
     processed_img = process_image(file)
     object_name = generate_object_name(entry_id)
 
@@ -25,11 +27,7 @@ def post_photo_for_entry(entry_id):
         'image/jpeg',
         object_name
     )
-
-    
-    if not file:
-        return {'img_path': entry.img_path}, 200
-    
+        
     entry.img_path = img_path
     db.session.commit()
 
