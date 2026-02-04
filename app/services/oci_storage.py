@@ -16,11 +16,6 @@ object_storage_client = oci.object_storage.ObjectStorageClient(config)
 
 
 def upload_img_with_par(file_buffer, content_type, object_name):
-    # bucket = object_storage_client.get_bucket(
-    #     namespace_name=Config.OCI_NAMESPACE,
-    #     bucket_name=Config.OCI_BUCKET_NAME
-    # )
-
     par_details = oci.object_storage.models.CreatePreauthenticatedRequestDetails(
         name=f'upload-entry-{object_name}',
         access_type='ObjectWrite',
