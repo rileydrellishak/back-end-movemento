@@ -16,6 +16,6 @@ class Config:
     OCI_PAR_EXPIRATION_MINUTES = int(os.getenv('OCI_PAR_EXPIRATION_MINUTES', 5))
 
     OCI_USER = os.getenv("OCI_USER")
-    OCI_KEY_CONTENT = os.getenv("OCI_KEY_CONTENT")
+    OCI_KEY_CONTENT = os.getenv("OCI_PRIVATE_KEY").replace("\\n", "\n")
     OCI_FINGERPRINT = os.getenv("OCI_FINGERPRINT")
     OCI_TENANCY = os.getenv("OCI_TENANCY")
