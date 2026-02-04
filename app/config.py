@@ -14,3 +14,8 @@ class Config:
     OCI_NAMESPACE = os.getenv('OCI_NAMESPACE')
     OCI_BUCKET_NAME = os.getenv('OCI_BUCKET_NAME')
     OCI_PAR_EXPIRATION_MINUTES = int(os.getenv('OCI_PAR_EXPIRATION_MINUTES', 5))
+
+    OCI_USER = os.getenv("OCI_USER")
+    OCI_KEY_CONTENT = os.getenv("OCI_KEY_CONTENT")
+    OCI_FINGERPRINT = os.getenv("OCI_FINGERPRINT")
+    OCI_TENANCY = os.getenv("OCI_TENANCY")

@@ -2,8 +2,15 @@ import oci
 import requests
 from datetime import datetime, timedelta
 from app.config import Config
+from oci.config import from_file
 
-config = oci.config.from_file('~/app/config.py')
+config = {
+    "user": Config.OCI_USER,
+    "key_content": Config.OCI_KEY_FILE,
+    "fingerprint": Config.OCI_FINGERPRINT,
+    "tenancy": Config.OCI_TENANCY,
+    "region": Config.OCI_REGION
+}
 
 object_storage_client = oci.object_storage.ObjectStorageClient(config)
 
