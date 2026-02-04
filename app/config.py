@@ -19,3 +19,4 @@ class Config:
     OCI_KEY_CONTENT = os.getenv("OCI_PRIVATE_KEY").replace("\\n", "\n")
     OCI_FINGERPRINT = os.getenv("OCI_FINGERPRINT")
     OCI_TENANCY = os.getenv("OCI_TENANCY")
+    OCI_COMPARTMENT_ID = os.getenv("OCI_COMPARTMENT_ID")
