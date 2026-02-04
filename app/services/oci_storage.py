@@ -6,7 +6,7 @@ from oci.config import from_file
 
 config = {
     "user": Config.OCI_USER,
-    "key_content": Config.OCI_KEY_FILE,
+    "key_content": Config.OCI_KEY_CONTENT,
     "fingerprint": Config.OCI_FINGERPRINT,
     "tenancy": Config.OCI_TENANCY,
     "region": Config.OCI_REGION
