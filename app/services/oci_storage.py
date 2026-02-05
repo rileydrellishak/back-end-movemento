@@ -16,29 +16,29 @@ object_storage_client = oci.object_storage.ObjectStorageClient(config)
 
 
 def upload_img_with_par(file_buffer, content_type, object_name):
-    par_details = oci.object_storage.models.CreatePreauthenticatedRequestDetails(
-        name=f'upload-entry-{object_name}',
-        access_type='ObjectWrite',
-        object_name=object_name,
-        time_expires=datetime.now(timezone.utc) + timedelta(minutes=Config.OCI_PAR_EXPIRATION_MINUTES)
-    )
+    par_url = Config.OCI_WRITE_PAR_URL
 
-    par = object_storage_client.create_preauthenticated_request(
-        namespace_name=object_storage_client.get_namespace().data,
-        bucket_name=Config.OCI_BUCKET_NAME,
-        create_preauthenticated_request_details=par_details
-    )
-
-    par_url = f'https://objectstorage.{Config.OCI_REGION}.oraclecloud.com{par.data.access_uri}'
+    request_url = f'{par_url}/{object_name}'
 
     response = requests.put(
-        par_url,
+        request_url,
         data=file_buffer,
         headers={'ContentType': content_type}
     )
 
     response.raise_for_status()
 
-    return (
-        f'https://objectstorage.{Config.OCI_REGION}.oraclecloud.com/n/{Config.OCI_NAMESPACE}/b/{Config.OCI_BUCKET_NAME}/o/{object_name}'
+    return object_name
+
+def get_img_with_par(object_name):
+    par_url = Config.OCI_READ_PAR_URL
+
+    request_url = f'{par_url}/{object_name}'
+
+    response = requests.get(
+        request_url
     )
+
+    response.raise_for_status()
+
+    return response.content

@@ -20,3 +20,6 @@ class Config:
     OCI_FINGERPRINT = os.getenv("OCI_FINGERPRINT")
     OCI_TENANCY = os.getenv("OCI_TENANCY")
     OCI_COMPARTMENT_ID = os.getenv("OCI_COMPARTMENT_ID")
+
+    OCI_READ_PAR_URL = os.getenv("OCI_READ_PAR_URL")
+    OCI_WRITE_PAR_URL = os.getenv("OCI_WRITE_PAR_URL")
