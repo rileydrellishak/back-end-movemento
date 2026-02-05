@@ -3,7 +3,7 @@ import requests
 from app.models.journal_entry import JournalEntry
 from app.utilities.route_utilities import create_model, get_models_with_filters, validate_model
 from app.utilities.image_processing import process_image, generate_object_name
-from app.services.oci_storage import upload_img_with_par
+from app.services.oci_storage import upload_img_with_par, get_img_with_par
 from app.db import db
 
 bp = Blueprint('journal_entries_bp', __name__, url_prefix='/entries')
@@ -32,3 +32,8 @@ def post_photo_for_entry(entry_id):
     db.session.commit()
 
     return {'img_path': img_path}, 201
+
+@bp.get('/<entry_id>/photo')
+def get_photo_for_entry(entry_id):
+    entry = validate_model(JournalEntry, entry_id)
+    return get_img_with_par(entry.img_path), 200
