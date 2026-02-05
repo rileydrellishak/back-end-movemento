@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, Response
 import requests
 from app.models.journal_entry import JournalEntry
 from app.utilities.route_utilities import create_model, get_models_with_filters, validate_model
@@ -36,4 +36,5 @@ def post_photo_for_entry(entry_id):
 @bp.get('/<entry_id>/photo')
 def get_photo_for_entry(entry_id):
     entry = validate_model(JournalEntry, entry_id)
-    return get_img_with_par(entry.img_path), 200
+    img_bytes = get_img_with_par(entry.img_path)
+    return Response(content=img_bytes, media_type='image/jpeg')
