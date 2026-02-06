@@ -42,3 +42,14 @@ def get_img_with_par(object_name):
     response.raise_for_status()
 
     return response.content
+
+def delete_img_from_oci(object_name):
+    namespace = object_storage_client.get_namespace().data
+    bucket = Config.OCI_BUCKET_NAME
+    object_storage_client.delete_object(
+        namespace_name=namespace,
+        bucket_name=bucket, 
+        object_name=object_name
+    )
+
+    return 'image deleted from object storage'
