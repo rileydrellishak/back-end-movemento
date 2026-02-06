@@ -224,7 +224,6 @@ def journal_entry_two(app, user_one, mood_one, mood_three, movement_three, movem
         moods_after=[mood_one],
         reflection='My mood is way better than neutral now',
         user_id=user_one.id,
-        img_path='/images/2.jpg',
     )
 
     db.session.add(journal_entry)
