@@ -4,6 +4,7 @@ from app.models.journal_entry import JournalEntry
 from app.models.movement import Movement
 from app.models.mood import Mood
 from app.utilities.route_utilities import create_model, get_models_with_filters, validate_model, update_model
+from app.services.oci_storage import delete_img_from_oci
 from app.db import db
 
 bp = Blueprint('users_bp', __name__, url_prefix='/users')
@@ -48,6 +49,9 @@ def delete_je_by_id(user_id, entry_id):
     journal_entry = validate_model(JournalEntry, entry_id)
 
     if journal_entry in set(user.journal_entries):
+        if (journal_entry.img_path):
+            delete_img_from_oci(journal_entry.img_path)
+
         db.session.delete(journal_entry)
         db.session.commit()
         return Response(status=204, mimetype='application/json')
