@@ -93,7 +93,7 @@ def update_journal_entry(entry, entry_data):
         elif hasattr(entry, attr):
             setattr(entry, attr, value)
 
-        elif attr in cannot_change:
+        elif attr in cannot_change or attr == 'img_path':
             continue
 
     db.session.commit()
