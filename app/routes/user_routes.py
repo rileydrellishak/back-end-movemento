@@ -90,11 +90,12 @@ def update_journal_entry(entry, entry_data):
                 instances.append(instance)
             setattr(entry, attr, instances)
         
+        elif attr in cannot_change or attr == 'img_path':
+            continue
+        
         elif hasattr(entry, attr):
             setattr(entry, attr, value)
 
-        elif attr in cannot_change or attr == 'img_path':
-            continue
 
     db.session.commit()
     return Response(status=204, mimetype='application/json')

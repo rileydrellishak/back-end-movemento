@@ -20,6 +20,7 @@ def post_photo_for_entry(entry_id):
     
     if entry.img_path:
         delete_img_from_oci(entry.img_path)
+        entry.img_path = None
         
     file = request.files.get('photo')
     processed_img = process_image(file)
