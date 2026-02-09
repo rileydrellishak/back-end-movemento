@@ -63,6 +63,15 @@ class JournalEntry(db.Model):
             mood_after = validate_model(Mood, entry_data['moods_after'][i])
             entry_data['moods_after'][i] = mood_after
         
+        created_at = entry_data.get('created_at')
+
+        if created_at:
+            entry_data['created_at'] = datetime.fromisoformat(
+                created_at.replace('Z', '+00:00')
+            )
+            
+        else: 
+            entry_data['created_at'] = datetime.now(timezone.utc)
         return cls(
             movements=entry_data['movements'],
             moods_before=entry_data['moods_before'],
@@ -70,7 +79,7 @@ class JournalEntry(db.Model):
             reflection=entry_data.get('reflection'),
             user_id=entry_data['user_id'],
             img_path=entry_data.get('img_path'),
-            created_at=entry_data.get('created_at', datetime.now(timezone.utc))
+            created_at=entry_data['created_at']
         )
 
     @classmethod
