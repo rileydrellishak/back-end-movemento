@@ -1,5 +1,5 @@
 # Movemento Back End
-Movemento, a mobile application for users to mindfully log their exercise. Lots of exercise logging apps like Strava and Apple Fitness are focused on the quantitiative aspects of exercising. Movemento is intended to be a mindful exercise tracker where users can reflect on their exercise experiences from a mindfulness and wellness approach, focusing more on the qualitative benefits like improved mood, better sleep, and improved quality of life.
+Movemento, a mobile application for users to mindfully log their exercise. Lots of exercise logging apps like Strava and Apple Fitness are focused on the quantitative aspects of exercising. Movemento is intended to be a mindful exercise tracker where users can reflect on their exercise experiences from a mindfulness and wellness approach, focusing more on the qualitative benefits like improved mood, better sleep, and improved quality of life.
 ## Models
 |Model|Description|Attributes and Relationships|
 |-|-|-|
