@@ -13,7 +13,6 @@ class Config:
     OCI_REGION = os.getenv("OCI_REGION")
     OCI_NAMESPACE = os.getenv('OCI_NAMESPACE')
     OCI_BUCKET_NAME = os.getenv('OCI_BUCKET_NAME')
-    OCI_PAR_EXPIRATION_MINUTES = int(os.getenv('OCI_PAR_EXPIRATION_MINUTES', 5))
 
     OCI_USER = os.getenv("OCI_USER")
     OCI_KEY_CONTENT = os.getenv("OCI_PRIVATE_KEY").replace("\\n", "\n")

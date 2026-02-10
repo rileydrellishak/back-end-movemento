@@ -1,8 +1,6 @@
 import oci
 import requests
-from datetime import datetime, timedelta, timezone
 from app.config import Config
-from oci.config import from_file
 
 config = {
     "user": Config.OCI_USER,
